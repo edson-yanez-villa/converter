@@ -1,3 +1,4 @@
+package businessLogic;
 
 public abstract class Unit {
 	protected String initials;

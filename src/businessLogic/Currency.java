@@ -1,3 +1,4 @@
+package businessLogic;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -9,7 +10,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 
-class Currency extends Unit {
+public class Currency extends Unit {
 	private HashMap<String, Double> rates;
 	
 	public Currency(String initial) {
