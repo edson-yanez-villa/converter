@@ -69,28 +69,39 @@ public class Menu extends JFrame implements ActionListener {
 	}
 	
 	private void generateUnit(ActionEvent e) {
-		Unit unit;
-		String dialogue = "";
 		String option = (String) comboBox.getSelectedItem();
-		double value = 0;
-		if(option.equals("Conversor de Monedas")) {
-			dialogue = "Ingresa la cantidad de dinero que deseas convertir:";
-		}
+		String dialogue = getDialogue(option);
 		String input = JOptionPane.showInputDialog(dialogue);
-		if(input == null){
-			   this.setVisible(true);
+		double value = getValueInput(input, e);
+		Currencies currencies = new Currencies(value);
+		currencies.setVisible(true);
+		
+	}
+	
+	private String getDialogue(String option) {
+		switch (option) {
+		case "Conversor de Monedas": {
+			return "Ingresa la cantidad de dinero que deseas convertir:";
 		}
-		value = getValueInput(input, e);
+		default:
+			return "";
+		}
 	}
 	
 	private double getValueInput(String input, ActionEvent e) {
-		double value = 0;
-		try {
-			value = Double.parseDouble(input);
-		} catch (Exception e2) {
-			JOptionPane.showMessageDialog(null, "Valor no Válido");
-			this.actionPerformed(e);
-		}
+	    double value = 0;
+	    //if OK is pushed then (if not strDialogResponse is null)
+	    if (input != null){
+	    	try {
+				value = Double.parseDouble(input);
+			} catch (Exception e2) {
+				JOptionPane.showMessageDialog(null, "Valor no Válido");
+				this.actionPerformed(e);
+			}
+	    }
+	    else{
+	    	this.setVisible(true);
+	    }
 		return value;
 	}
 }
