@@ -1,8 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JFrame;
-
 import businessLogic.Currency;
 import businessLogic.Unit;
 import views.Menu;

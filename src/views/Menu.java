@@ -12,15 +12,16 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import businessLogic.Currency;
-import businessLogic.Unit;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 
 public class Menu extends JFrame implements ActionListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JButton btnCancel;
 	private JComboBox<String> comboBox;
@@ -72,7 +73,7 @@ public class Menu extends JFrame implements ActionListener {
 		String option = (String) comboBox.getSelectedItem();
 		String dialogue = getDialogue(option);
 		String input = JOptionPane.showInputDialog(dialogue);
-		sendValueInput(input, e);
+		sendValueInput(input, option, e);
 	}
 	
 	private String getDialogue(String option) {
@@ -85,12 +86,12 @@ public class Menu extends JFrame implements ActionListener {
 		}
 	}
 	
-	private void sendValueInput(String input, ActionEvent e) {
+	private void sendValueInput(String input, String option, ActionEvent e) {
 	    if (input != null){
 	    	try {
 	    		double value = 0;
 				value = Double.parseDouble(input);
-				Currencies currencies = new Currencies(value);
+				Currencies currencies = new Currencies(value, option, this);
 				currencies.setVisible(true);
 			} catch (Exception error) {
 				JOptionPane.showMessageDialog(null, "Valor no Válido");
