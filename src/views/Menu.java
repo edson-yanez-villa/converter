@@ -72,10 +72,7 @@ public class Menu extends JFrame implements ActionListener {
 		String option = (String) comboBox.getSelectedItem();
 		String dialogue = getDialogue(option);
 		String input = JOptionPane.showInputDialog(dialogue);
-		double value = getValueInput(input, e);
-		Currencies currencies = new Currencies(value);
-		currencies.setVisible(true);
-		
+		sendValueInput(input, e);
 	}
 	
 	private String getDialogue(String option) {
@@ -88,13 +85,14 @@ public class Menu extends JFrame implements ActionListener {
 		}
 	}
 	
-	private double getValueInput(String input, ActionEvent e) {
-	    double value = 0;
-	    //if OK is pushed then (if not strDialogResponse is null)
+	private void sendValueInput(String input, ActionEvent e) {
 	    if (input != null){
 	    	try {
+	    		double value = 0;
 				value = Double.parseDouble(input);
-			} catch (Exception e2) {
+				Currencies currencies = new Currencies(value);
+				currencies.setVisible(true);
+			} catch (Exception error) {
 				JOptionPane.showMessageDialog(null, "Valor no Válido");
 				this.actionPerformed(e);
 			}
@@ -102,6 +100,5 @@ public class Menu extends JFrame implements ActionListener {
 	    else{
 	    	this.setVisible(true);
 	    }
-		return value;
 	}
 }

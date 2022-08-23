@@ -1,24 +1,14 @@
 {
     "EUR": {
+        "name": "Euro",
         "rates": {
-            "AUD": 1.566015,
-            "CAD": 1.560132,
-            "CHF": 1.154727,
-            "CNY": 7.827874,
-            "GBP": 0.882047,
-            "JPY": 132.360679,
-            "USD": 1.23396
-        }
-    },
-    "USD": {
-        "rates": {
-            "AUD": 1.566015,
-            "CAD": 1.560132,
-            "CHF": 1.154727,
-            "CNY": 7.827874,
-            "GBP": 0.882047,
-            "JPY": 132.360679,
-            "USD": 1.23396
+            "AUD": {"name": "Australia Dollar", "rate":1.566015},
+            "CAD": {"name": "Canada Dollar", "rate":1.560132},
+            "CHF": {"name": "Switzerland Franc", "rate":1.154727},
+            "CNY": {"name": "China Yuan/Renminbi", "rate":7.827874},
+            "GBP": {"name": "Great Britain Pound", "rate":0.882047},
+            "JPY": {"name": "Japan Yen", "rate":132.360679},
+            "USD": {"name": "USA Dollar", "rate":1.23396}
         }
     }
 }
