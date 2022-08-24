@@ -29,6 +29,8 @@ public class Menu extends JFrame implements ActionListener {
 	private List<String> options;
 
 	public Menu(List<String> options) {
+		setTitle("Menu");
+		setResizable(false);
 		this.options = options;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 255, 142);
@@ -62,6 +64,7 @@ public class Menu extends JFrame implements ActionListener {
 		Object source = e.getSource();
 		if(source == btnCancel) {
 			Continue continueFrame = new Continue(this);
+			continueFrame.setLocationRelativeTo(null);
 			continueFrame.setVisible(true);
 		}
 		if(source == btnOk) {
@@ -92,6 +95,7 @@ public class Menu extends JFrame implements ActionListener {
 	    		double value = 0;
 				value = Double.parseDouble(input);
 				Currencies currencies = new Currencies(value, option, this);
+				currencies.setLocationRelativeTo(null);
 				currencies.setVisible(true);
 			} catch (Exception error) {
 				JOptionPane.showMessageDialog(null, "Valor no Válido");

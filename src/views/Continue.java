@@ -23,6 +23,8 @@ public class Continue extends JFrame implements ActionListener {
 	private JFrame frame;
 	
 	public Continue(JFrame frame) {
+		setTitle("Select an Option");
+		setResizable(false);
 		this.frame = frame;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 327, 125);

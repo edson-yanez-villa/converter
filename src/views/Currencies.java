@@ -6,10 +6,12 @@ import javax.swing.border.EmptyBorder;
 
 import org.json.simple.JSONObject;
 
+import businessLogic.Currency;
 import businessLogic.Unit;
 import dataAccess.Reader;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
 
 import java.awt.event.ActionEvent;
@@ -32,14 +34,20 @@ public class Currencies extends JFrame implements ActionListener {
 	private JComboBox<String> comboBox;
 	private JButton btnOk;
 	private JButton btnCancel;
+	private JFrame frame;
 	
 	private HashMap<String, List<String>> conversors;
-	private JFrame frame;
-	private Unit unit;
+	
+	private double value;
+	private String option;
 	
 	
 	public Currencies(double value, String option, JFrame frame) {
+		setTitle("Monedas");
+		setResizable(false);
 		this.frame = frame;
+		this.value = value;
+		this.option = option;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		conversors = getListOfConvertions(option);
@@ -94,6 +102,7 @@ public class Currencies extends JFrame implements ActionListener {
 				List<String> currencies = new ArrayList<>();
 				currencies.add(key.toString());
 				currencies.add(keyRate.toString());
+				currencies.add(rate.get("name").toString());
 				list.put(baseName + " a " + rate.get("name").toString(), currencies);
 			}
 		}
@@ -101,16 +110,42 @@ public class Currencies extends JFrame implements ActionListener {
 	}
 	
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent e){
 		this.setVisible(false);
 		Object source = e.getSource();
 		if(source == btnCancel) {
 			Continue continueFrame = new Continue(this);
+			continueFrame.setLocationRelativeTo(null);
 			continueFrame.setVisible(true);
 		}
 		if(source == btnOk) {
-			System.out.println("Ok");
+			String value = getConvertion((String) comboBox.getSelectedItem());
+			JOptionPane.showMessageDialog(null, "Tienes $ " + value);
+			Continue continueFrame = new Continue(frame);
+			continueFrame.setLocationRelativeTo(null);
+			continueFrame.setVisible(true);
 		}
 	}
+	
+	
+	private String getConvertion(String selectItem){
+		List<String> currencies = conversors.get(selectItem);
+		Unit unit = getUnit(currencies.get(0), this.option);
+		if(unit != null) {
+			return String.valueOf(unit.convertValue(this.value, currencies.get(1))) + " " + currencies.get(2);
+		}
+		return "";
+	}
+	
+	private Unit getUnit(String initial, String option) {
+		switch (option) {
+			case "Conversor de Monedas": {
+				return new Currency(initial);
+			}
+			default:
+				return null;
+		}
+	}
+	
 	
 }
