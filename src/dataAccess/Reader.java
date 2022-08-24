@@ -16,13 +16,12 @@ public class Reader {
 		this.path = path;
 	}
 	
-	public JSONObject getJson(String initials) {
+	public JSONObject getJson() {
 		JSONParser parser = new JSONParser();
 		JSONObject jsonContent = null;
 		try {
 			Object obj = parser.parse(new FileReader(this.path));
-			JSONObject jsonObject = (JSONObject) obj;
-			jsonContent = (JSONObject) jsonObject.get(initials);
+			jsonContent = (JSONObject) obj;
 		}
 		catch (FileNotFoundException e) {e.printStackTrace();}
 		catch (IOException e) {e.printStackTrace();}

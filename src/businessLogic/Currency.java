@@ -19,7 +19,9 @@ public class Currency extends Unit {
 	public HashMap<String, Double> getRates(String initials){
 		Reader reader = new Reader("rates.json");
 		HashMap<String, Double> rates = new HashMap<String, Double>();
-		JSONObject jsonRates = (JSONObject) reader.getJson(initials).get("rates");
+		JSONObject jsonContent = reader.getJson();
+		JSONObject JsonCurrency = (JSONObject) jsonContent.get(initials);
+		JSONObject jsonRates = (JSONObject) JsonCurrency.get("rates");
 		for(Object key : jsonRates.keySet()) {
 			JSONObject value = (JSONObject) jsonRates.get(key.toString());
 			rates.put(key.toString(), (double)value.get("rate"));

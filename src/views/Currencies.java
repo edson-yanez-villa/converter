@@ -12,14 +12,16 @@ import dataAccess.Reader;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Vector;
 
 import javax.swing.JButton;
 
-public class Currencies extends JFrame {
+public class Currencies extends JFrame implements ActionListener {
 
 	/**
 	 * 
@@ -31,13 +33,18 @@ public class Currencies extends JFrame {
 	private JButton btnOk;
 	private JButton btnCancel;
 	
+	private HashMap<String, List<String>> conversors;
+	private Menu menu;
 	private Unit unit;
 	
 	
 	public Currencies(double value, String option, Menu menu) {
+		this.menu = menu;
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		List<String> conversors = getListOfConvertions(option);
+		conversors = getListOfConvertions(option);
 		setBounds(100, 100, 342, 151);
+		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -47,48 +54,62 @@ public class Currencies extends JFrame {
 		lblNewLabel.setBounds(10, 11, 328, 14);
 		contentPane.add(lblNewLabel);
 		
-		comboBox = new JComboBox<String>(new Vector<String>(conversors));
+		comboBox = new JComboBox<String>(new Vector<String>(conversors.keySet()));
 		comboBox.setBounds(10, 36, 306, 22);
 		contentPane.add(comboBox);
 		
 		btnOk = new JButton("OK");
+		btnOk.addActionListener(this);
 		btnOk.setBounds(47, 78, 89, 23);
 		contentPane.add(btnOk);
 		
 		btnCancel = new JButton("Cancel");
+		btnCancel.addActionListener(this);
 		btnCancel.setBounds(176, 78, 89, 23);
 		contentPane.add(btnCancel);
 	}
 	
-	private List<String> getListOfConvertions(String option){
-		List<String> list;
+	private HashMap<String, List<String>> getListOfConvertions(String option){
+		HashMap<String, List<String>> list;
 		switch (option) {
 			case "Conversor de Monedas": {
-				list = getRates(Reader("rates.json")); 
+				list = getRates(new Reader("rates.json")); 
 				break;
 			}
 			default:
-				list = new ArrayList<String>();
+				list = new HashMap<>();
 		}
 		return list;
 	}
 	
-	private List<String> getRates(JSONObject json){
-		List<String> list = new ArrayList<>();
-		for(Object key : json.keySet()) {
-			JSONObject value = (JSONObject) json.get(key.toString());
-			String baseName = value.get("name").toString();
-			JSONObject rates = (JSONObject) value.get("rates");
-			for(Object keyRate : json.keySet()) {
-				JSONObject rate = (JSONObject) value.get(keyRate);
-				list.add(baseName + " a " + rate.get("name").toString());
+	private HashMap<String, List<String>> getRates(Reader reader){
+		HashMap<String, List<String>> list = new HashMap<>();
+		JSONObject content = reader.getJson();
+		for(Object key : content.keySet()) {
+			JSONObject jsonCurrency = (JSONObject) content.get(key.toString());
+			String baseName = jsonCurrency.get("name").toString();
+			JSONObject rates = (JSONObject) jsonCurrency.get("rates");
+			for(Object keyRate : rates.keySet()) {
+				JSONObject rate = (JSONObject) rates.get(keyRate);
+				List<String> currencies = new ArrayList<>();
+				currencies.add(key.toString());
+				currencies.add(keyRate.toString());
+				list.put(baseName + " a " + rate.get("name").toString(), currencies);
 			}
 		}
 		return list;
 	}
-
-	private JSONObject Reader(String string) {
-		// TODO Auto-generated method stub
-		return null;
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		this.setVisible(false);
+		Object source = e.getSource();
+		if(source == btnCancel) {
+			System.out.println("cancel");
+		}
+		if(source == btnOk) {
+			System.out.println("Ok");
+		}
 	}
+	
 }
