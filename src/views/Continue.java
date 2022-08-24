@@ -20,10 +20,10 @@ public class Continue extends JFrame implements ActionListener {
 	private JButton btnNo;
 	private JButton btnYes;
 	private JButton btnCancel;
-	private Menu menuFrame;
+	private JFrame frame;
 	
-	public Continue(Menu menu) {
-		this.menuFrame = menu;
+	public Continue(JFrame frame) {
+		this.frame = frame;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 327, 125);
 		contentPane = new JPanel();
@@ -58,7 +58,7 @@ public class Continue extends JFrame implements ActionListener {
 			JOptionPane.showMessageDialog(null, "Programa Tarminado");
 		}	
 		if(e.getSource() == btnYes) {
-			this.menuFrame.setVisible(true);
+			this.frame.setVisible(true);
 		}
 	}
 

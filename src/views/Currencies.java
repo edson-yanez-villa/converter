@@ -34,12 +34,12 @@ public class Currencies extends JFrame implements ActionListener {
 	private JButton btnCancel;
 	
 	private HashMap<String, List<String>> conversors;
-	private Menu menu;
+	private JFrame frame;
 	private Unit unit;
 	
 	
-	public Currencies(double value, String option, Menu menu) {
-		this.menu = menu;
+	public Currencies(double value, String option, JFrame frame) {
+		this.frame = frame;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		conversors = getListOfConvertions(option);
@@ -105,7 +105,8 @@ public class Currencies extends JFrame implements ActionListener {
 		this.setVisible(false);
 		Object source = e.getSource();
 		if(source == btnCancel) {
-			System.out.println("cancel");
+			Continue continueFrame = new Continue(this);
+			continueFrame.setVisible(true);
 		}
 		if(source == btnOk) {
 			System.out.println("Ok");
