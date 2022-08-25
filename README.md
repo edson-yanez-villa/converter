@@ -1,4 +1,4 @@
-# Conversor_Monedas_Temperatura
+# Conversor
 En esta aplicacion aplique mis conocimientos de la programacion orientada a objetos y el consumo de API en esta aplicación podemos convertir diferentes tipos de monedas y de temperatura.
 
 En este conversor puedes hacer conversiones de peso Euro a: 
@@ -27,6 +27,6 @@ Tambien se puede hacer conversiones de:
 
 El conversor requiere de [Java v8](https://www.java.com/es/download/ie_manual.jsp) y [JDK v8](https://www.java.com/es/download/ie_manual.jsp) para poder ser ejecutado.
 
-## preview
+## Preview
 
 ![](https://i.imgur.com/qZNXGBd.jpg)
