@@ -8,6 +8,7 @@ public class App {
 	public static void main(String[] args) {
 		List<String> options = new ArrayList<String>();
 		options.add("Conversor de Monedas");
+		options.add("Conversor de Temperatura");
 		Menu frame = new Menu(options);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);

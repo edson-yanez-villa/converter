@@ -1,0 +1,23 @@
+{
+    "C": {
+        "name": "Celsius",
+        "rates": {
+            "k": {"name": "Kelvin", "rate":274.15},
+            "F": {"name": "Fahrenheit", "rate":33.8}
+        }
+    },
+    "F": {
+        "name": "Fahrenheit",
+        "rates": {
+            "k": {"name": "Kelvin", "rate":255.9278},
+            "C": {"name": "Celsius", "rate":-17.2222}
+        }
+    },
+    "K": {
+        "name": "Kelvin",
+        "rates": {
+            "C": {"name": "Celsius", "rate":-272.14996},
+            "F": {"name": "Fahrenheit", "rate":-457.869928}
+        }
+    }
+}

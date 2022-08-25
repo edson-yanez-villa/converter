@@ -1,14 +1,14 @@
 package businessLogic;
+
 import java.text.DecimalFormat;
 import java.util.HashMap;
 
-
-public class Currency extends Unit {
-	private HashMap<String, Double> rates;
+public class Temperature extends Unit {
+private HashMap<String, Double> rates;
 	
-	public Currency(String initial) {
+	public Temperature(String initial) {
 		super(initial);
-		this.rates = getRates(initials, "rates.json");
+		this.rates = getRates(initials, "temperatura.json");
 	}
 	
 	@Override

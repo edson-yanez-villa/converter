@@ -84,6 +84,9 @@ public class Menu extends JFrame implements ActionListener {
 		case "Conversor de Monedas": {
 			return "Ingresa la cantidad de dinero que deseas convertir:";
 		}
+		case "Conversor de Temperatura": {
+			return "Ingresa los grados que deseas convertir:";
+		}
 		default:
 			return "";
 		}
@@ -94,7 +97,7 @@ public class Menu extends JFrame implements ActionListener {
 	    	try {
 	    		double value = 0;
 				value = Double.parseDouble(input);
-				Currencies currencies = new Currencies(value, option, this);
+				Conversor currencies = new Conversor(value, option, this);
 				currencies.setLocationRelativeTo(null);
 				currencies.setVisible(true);
 			} catch (Exception error) {
